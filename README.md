@@ -10,7 +10,7 @@
  <h3>Funcionalidad</h3>
  <p>El proyecto consta de dos partes principales:</p>
  <p>1.- Obtención de Precios desde Páginas Web</p>
- <p>- Se accede a las páginas web de los tres artículos mediante las URLs proporcionadas en las variables `url`, `url1` y `url2`.</p>
+ <p>- Se accede a las páginas web de los tres artículos mediante la lista "URLs".</p>
  <p>- Utilizando la biblioteca `requests`, se realiza una solicitud HTTP a cada página y se guarda el contenido HTML en las variables `page`, `page1` y `page2`.</p>
  <p> - Luego, con la ayuda de `BeautifulSoup`, se analiza el código HTML y se extraen las partes que contengan las etiquetas `<span>` con el atributo `class="andes-money-amount__fraction"`.</p>
  <p> - Estas partes se convierten en strings para poder ser procesadas más fácilmente.</p>
