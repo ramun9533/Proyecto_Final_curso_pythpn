@@ -1,0 +1,236 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel} %para escribir en español
+\usepackage[utf8]{inputenc} 
+\usepackage{listings}
+\usepackage[T1]{fontenc} %para acentos y otros caracteres
+%Otros video
+\usepackage{xcolor}
+% 211, 84, 0
+% 76, 175, 80 
+%{0.3,0.3,0.6}
+\definecolor{codegreen}{rgb}{0.2, 0.8, 0.35}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.9,0.9,0.9}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%Paquetes necesarios
+%\usepackage{minted}
+\usepackage{geometry} %para ajustar los margenes de la página
+\usepackage{graphicx}
+%para incluir caracteres especiales
+\usepackage[T1]{fontenc} %para acentos y otros caracteres
+
+
+\lstset{language=Python}
+%Título
+%\title{Informe de Actividad}
+\author{William Orta}
+%\author{hola}
+\date{\today} %fecha actual
+%Comienza el documento
+\begin{document}
+
+	\begin{figure}[h!]
+		\begin{minipage}[t]{0.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{/home/ra/Documentos/python/IPN-logo.jpg}
+			%\caption{}
+			\label{fig:imagen1}
+		\end{minipage}\hfill
+		\begin{minipage}[t]{0.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{/home/ra/Documentos/python/Upiic_logo.jpg}
+			%\documentclass[options]{class}\caption{}
+			\label{fig:imagen2}
+		\end{minipage}
+	\end{figure}
+\begin{center}
+	
+	\vspace*{1.5cm}
+	\LARGE
+	\textbf{Instituto Politécnico Nacional}
+	\vspace{0.5cm}
+	\\Unidad Profesional Interdisciplinaria de Ingeniería campus Coahuila\\
+	\vspace{1cm}
+	\textbf{Reporte Proyecto Final Curso de Python}\\
+	\vspace{0.1cm}
+	
+William Orta
+	\vfill
+	%	%Version 2
+	%	\includegraphics[width=10cm]{figuras/Logo_2}
+	%	\vfill
+	%	%fin Version 2
+
+	\vspace{0.25cm}
+	Docente(s): Ing. Jessica Sarahí Méndez / Ing.Cuauhtemoc Bautista
+	 \\
+	\vspace{0.25cm}
+	\Large
+	San Buenaventura, Coahuila a \today
+	
+\end{center}
+	\begin{minipage}[t]{1.00\textwidth}
+		\centering
+%		\maketitle %Inserta el título
+	\end{minipage}
+	\newpage
+	%\chapter{Introducción}
+	
+		%\label{Introduccion}
+	\section{Introduccion}
+	
+	Este código tiene como objetivo obtener los precios de tres artículos de comercio electrónico desde sus respectivas URLs, mostrar los precios en forma de gráfica de barras y etiquetarlos con los nombres de los artículos. A continuación, se explica paso a paso la funcionalidad del código: contenidos...
+	
+	\section{Desarrollo}
+	1. Se importan las librerías necesarias:
+	- `matplotlib.pyplot`: Para crear la gráfica de barras y mostrarla.
+	- `bs4.BeautifulSoup`: Para extraer información del contenido HTML de las páginas web.
+	- `requests`: Para realizar solicitudes HTTP y obtener el contenido de las páginas web.
+	
+	2. Se define la función `get\_price(url)`:
+	- Esta función recibe una URL como parámetro y realiza los siguientes pasos:
+	- Realiza una solicitud HTTP a la URL especificada usando `requests.get(url)`.
+	- Parte el contenido de la página web usando `BeautifulSoup` y lo almacena en `soup`.
+	- Busca el primer elemento `span` que tenga el atributo `class` con el valor ```andes-money-amount\_\_fraction''`, que generalmente contiene el precio del artículo.
+	- Extrae el texto dentro del elemento `span` y lo guarda en `price\_str`.
+	- Reemplaza las comas en `price\_str` para eliminar la separación de miles en el precio.
+	- Convierte el precio en formato de texto a un número entero y lo retorna.
+	
+	
+	
+	4. Se crea una lista con las iteracciones de precios = [get\_price(url) for url in urls]
+	
+	- `precios`: Esta es la nueva lista que queremos crear, que contendrá los precios de los artículos.
+	- `get\_price(url)`: Esta es la expresión que se aplica a cada elemento (`url`) de la lista `urls`. En este caso, se llama a la función `get\_price()` pasando cada URL como argumento para obtener el precio del artículo correspondiente.
+	- `for url in urls`: Esta es la parte de la lista de iteracion que especifica el bucle. Para cada elemento `url` en la lista `urls`, la expresión `get\_price(url)` se evaluará y el resultado se agregará a la nueva lista `precios`.
+	
+	Entonces, en resumen, la  recorre la lista de URLs (`urls`), llama a la función `get\_price()` con cada URL para obtener el precio correspondiente, y construye una nueva lista llamada `precios` que contiene los precios de los tres artículos. Al finalizar la ejecución de este codigo de iteracion, la lista `precios` contendrá los precios obtenidos de las URLs.
+	5. Se define la función `imprime(precios, articulos)`:
+	- Esta función recibe dos listas como parámetros: `precios` (que contiene los precios de los artículos) y `articulos` (que contiene los nombres de los artículos).
+	- Crea una gráfica de barras utilizando `plt.bar(articulos, precios)`, donde los nombres de los artículos se utilizan como etiquetas en el eje x y los precios se representan en el eje y.
+	- Se agregan etiquetas al eje x e y mediante `plt.xlabel('Artículos')` y `plt.ylabel('Precio')`.
+	- Se agrega un título al gráfico con `plt.title('Precios de tres artículos')`.
+	- Finalmente, se muestra la gráfica con `plt.show()`.
+	
+	6. Se llama a la función `imprime(precios, articulos)` para mostrar la gráfica con los precios de los tres artículos. Los datos para la gráfica son obtenidos previamente con `precios = [get\_price(url) for url in urls]`.
+	
+	En resumen, este código es un ejemplo de cómo obtener los precios de productos desde páginas web utilizando la biblioteca `BeautifulSoup`, mostrarlos en una gráfica de barras utilizando `matplotlib` y etiquetarlos con los nombres de los artículos.
+	
+	\section{Codigo}
+	\subsection{Se importan librerias}
+Se importan las librerías necesarias para realizar peticiones al sitio en internet (requests) y para crear la gráfica (matplotlib.pyplot).
+\begin{lstlisting}[language=Python]
+# Se importa libreria para dibujar
+import matplotlib.pyplot as plt
+# Se iportan librerias para hacer peticiones a las paginas we y obtener su codigo
+# , asi como tambien para tratar los datos web obtenidos
+from bs4 import BeautifulSoup
+import requests
+\end{lstlisting}	
+\subsection{Funcion 'mameluco(url)'}	
+\begin{lstlisting}[language=Python]
+def mameluco(url):
+	# Manda consultar la pagina "url" y guarda el contenido en "page"
+	page = requests.get(url)
+	# Secciona el contenido de la página usando BeautifulSoup
+	sopita = BeautifulSoup(page.content, 'html.parser')	
+	# Crea una lista de todos los elementos que contienen las etiquetas "span" y el atributo "class":"andes-money-amount__fraction" con un límite de lista de 2 (limit=2)
+	chango_tag = sopita.find_all('span', attrs={"class": "andes-money-amount__fraction"}, limit=2)
+	# Extrae el segundo elemento de la lista (posición 1) y lo convierte a string
+	chango_tag1 = str(chango_tag[1])
+	# Crea un nuevo objeto BeautifulSoup a partir del código HTML que está en chango_tag1
+	sopita1 = BeautifulSoup(chango_tag1, 'html.parser')
+	# Obtiene el contenido que está dentro de las etiquetas span
+	chango_tag2 = sopita1.find('span', attrs={"class": "andes-money-amount__fraction"})
+	# Quita las comas del texto obtenido
+	price_str = chango_tag2.text.replace(',', '')
+	# Convierte el precio a un entero y lo retorna
+	return int(price_str)		
+\end{lstlisting}
+%\subsection{La función mameluco(url) realiza los siguientes pasos:}
+La función mameluco(url) realiza los siguientes pasos:
+
+Hace una solicitud a la página web proporcionada por url utilizando requests.get(url) y guarda el contenido en page.
+Utiliza BeautifulSoup para extraer el contenido de la página y lo guarda en sopita. Busca todos los elementos que contengan la etiqueta span y el atributo class con valor andes-money-amount\_\_fraction, limitando la búsqueda a 2 resultados (esto es para evitar obtener precios no deseados). Estos elementos se guardan en chango\_tag.
+Extrae el segundo elemento de chango\_tag (posición 1) y lo convierte a un string, almacenándolo en chango\_tag1.
+Crea un nuevo objeto BeautifulSoup llamado sopita1 utilizando el código HTML que está en chango\_tag1.
+Utiliza find() para obtener el contenido que está dentro de las etiquetas span en sopita1 y lo guarda en chango\_tag2.
+Quita las comas del texto obtenido en chango\_tag2.
+Convierte el precio a un entero y lo retorna.
+\subsection{Lista de URLs y obtención de precios}
+	En esta lista se guardan las direcciones de donde obtendremos los precios (que en este caso seran tres).
+	\begin{lstlisting}[language=Python]
+# Lista de URLs de los artículos a analizar
+urls = [
+'https://www.mercadolibre.com.mx/realme-11-pro-plus-12gb-ram-512gb-rom-200mp-ois-dual-sim-verde-5000-mah-100w-pantalla-curva-120hz-fhd/p/MLM23438802?pdp_filters=item_id:MLM1922556715#is_advertising=true&searchVariation=MLM23438802&position=1&search_layout=stack&type=pad&tracking_id=97805d59-1549-48d8-a60a-8b8beea8d935&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=1&ad_click_id=ZjZjY2ZlZWEtY2YwNi00YWI0LWJkZWItMDE3OWQwNWIyOTY3',
+'https://articulo.mercadolibre.com.mx/MLM-2286029578-celular-8849-tank-2-de-12gb-256gb-155000mah-con-proyector-_JM#polycard_client=bookmarks',
+'https://www.mercadolibre.com.mx/realme-gt-2-pro-dual-sim-256-gb-steel-black-12-gb-ram/p/MLM19130693?pdp_filters=item_id:MLM1507221033#is_advertising=true&searchVariation=MLM19130693&position=9&search_layout=stack&type=pad&tracking_id=d7676704-bae0-4c80-8d25-29fa31f1b171&is_advertising=true&ad_domain=V
+	\end{lstlisting}
+	
+	\subsection{Funcion imprime(precios, articulos):}
+	Con esta funcion graficaremos los precios en una grafica de tipo barras. La funcion recibe dos listas(la de precios, y la de articulos).  
+	\begin{lstlisting}[language=Python]
+def imprime(precios, articulos):
+	# Crear la gráfica de barras
+	plt.bar(articulos, precios)
+
+	# Etiquetas del eje x
+	plt.xlabel('Artículos')
+
+	# Etiquetas del eje y
+	plt.ylabel('Precio')
+
+	# Título del gráfico
+	plt.title('Precios de tres artículos')
+
+	# Mostrar el gráfico
+	plt.show()		
+	\end{lstlisting}
+\subsection{Llamada de funcio y creacion de listas de precios y articulos.}
+Llamamos las funcion mameluco, y por medio de un "for" le pasamos de una a una las paginas contenidas en la lista "urls", y nos regresara la lista de precioss. Ademas de cargar las lista del los nombres de los articulos.
+\begin{lstlisting}[language=Python]
+precios = [mameluco(url) for url in urls]
+#print(precios)
+# Se crea la lsita de aritculos
+articulos = ['realme-11-pro-plus-', 'Celular 8849 Tank 2 ', 'GT 2 Pro']
+\end{lstlisting}
+	\subsection{Llamamos la funcion "imprime(precios, articulos)" y le pasamos las dos listas.}
+	Se llama a la funcion "imprime", que a su vez carga las dos listas hechas previamente(una por medio de la funcione "mameluco" y la otra de forma manual)
+\begin{lstlisting}[language=Python]
+# Se manda a llamar la funcion "imprime" mandandole dos parametros: 
+# precios y articulos
+imprime(precios, articulos)
+\end{lstlisting}	
+\subsection{Grafica de barras.}
+Al final obtenemos la siguiente grafica de barras.
+	\begin{figure}[h!]
+	\begin{minipage}[t]{0.72\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Sin título.png}
+		%\caption{}
+		\label{fig:imagen1}
+	\end{minipage}\hfill
+	\end{figure}
+\end{document}
