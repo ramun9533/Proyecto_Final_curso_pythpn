@@ -21,18 +21,20 @@ precios = [get_price(url) for url in urls]
 
 # Datos de los precios y nombres de los artículos
 articulos = ['Moto G53', 'Cubot P80', 'GT 2 Pro']
+def imprime(precios, articulos):
+    # Crear la gráfica de barras
+    plt.bar(articulos, precios)
 
-# Crear la gráfica de barras
-plt.bar(articulos, precios)
+    # Etiquetas del eje x
+    plt.xlabel('Artículos')
 
-# Etiquetas del eje x
-plt.xlabel('Artículos')
+    # Etiquetas del eje y
+    plt.ylabel('Precio')
 
-# Etiquetas del eje y
-plt.ylabel('Precio')
+    # Título del gráfico
+    plt.title('Precios de tres artículos')
 
-# Título del gráfico
-plt.title('Precios de tres artículos')
+    # Mostrar el gráfico
+    plt.show()
 
-# Mostrar el gráfico
-plt.show()
+imprime(precios, articulos)
