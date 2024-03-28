@@ -16,26 +16,34 @@ def mameluco(url):
   # Manda consultar la pagina "url" y guarda en "page" el contenido
   page = requests.get(url)
   # Secciona "page"
+  #######################################################
+  # 3. Preparación de los datos
+  #######################################################
   sopita = BeautifulSoup(page.content, 'html.parser')
   #print(len(sopita))
-  # Se crea una lista de todos los elementos (con find_all) que contienen las 
-  # etiquetas "span" y los atributos (attr)"class":"andes-money-amount__fraction" 
+  # Se crea una lista de todos los elementos (con find_all) que contienen las
+  # etiquetas "span" y los atributos (attr)"class":"andes-money-amount__fraction"
   # con un limite de lista de 2 (limit=2)
   chango_tag = sopita.find_all('span', attrs={"class":"andes-money-amount__fraction"}, limit=2)
-  # De esa lista se extrae la posicion 2 de la variable chango_tag1 (chango_tag[1]) y convierte
-    # a string
+  ##########################################################
+  # Limpiar los datos
+  ###########################################################
+  # De esa lista se extrae la posicion 2 de la variable chango_tag1 (chango_tag[1])
   chango_tag1 = str(chango_tag[1])
   # Se vuelve a parir
-  sopita1 = BeautifulSoup(chango_tag1, 'html.parser') 
+  sopita1 = BeautifulSoup(chango_tag1, 'html.parser')
   # Con find() se obtiene lo que esta dentro de las etiquetas  span
   chango_tag2 = sopita1.find('span', attrs={"class":"andes-money-amount__fraction"})
   # Se le retira las comas
   price_str = chango_tag2.text.replace(',', '')
   # Se covierte a entero la variable price_str
   return int(price_str)
-# Se crea la lista "precios" usando la funcion "mameluco" y un "for" que va 
-# recorriendo todas las paginas web guardadas en la variable "urls" y mandando 
+# Se crea la lista "precios" usando la funcion "mameluco" y un "for" que va
+# recorriendo todas las paginas web guardadas en la variable "urls" y mandando
 # una por una a la variable "url"
+##################################################
+#Integrar los datos
+##################################################
 precios = [mameluco(url) for url in urls]
 #print(precios)
 # Se crea la lsita de aritculos
@@ -57,7 +65,9 @@ def imprime(precios, articulos):
 
     # Mostrar el gráfico
     plt.show()
-
-# Se manda a llamar la funcion "imprime" mandandole dos parametros: 
+#######################################################
+#5. Evaluación
+#######################################################
+# Se manda a llamar la funcion "imprime" mandandole dos parametros:
 # precios y articulos
 imprime(precios, articulos)
